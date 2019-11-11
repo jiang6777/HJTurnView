@@ -17,6 +17,8 @@
 		85A177C12378FFC00081CB76 /* HJTurnViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A177C02378FFC00081CB76 /* HJTurnViewTests.m */; };
 		85A177CC2378FFC00081CB76 /* HJTurnViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A177CB2378FFC00081CB76 /* HJTurnViewUITests.m */; };
 		85A177DB237900260081CB76 /* PVTurnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A177DA237900260081CB76 /* PVTurnView.m */; };
+		85A177DE237937030081CB76 /* camera_turn_arraw@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85A177DC237937030081CB76 /* camera_turn_arraw@3x.png */; };
+		85A177DF237937030081CB76 /* camera_turn_arraw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85A177DD237937030081CB76 /* camera_turn_arraw@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		85A177CD2378FFC00081CB76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85A177D9237900260081CB76 /* PVTurnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVTurnView.h; sourceTree = "<group>"; };
 		85A177DA237900260081CB76 /* PVTurnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVTurnView.m; sourceTree = "<group>"; };
+		85A177DC237937030081CB76 /* camera_turn_arraw@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_turn_arraw@3x.png"; sourceTree = "<group>"; };
+		85A177DD237937030081CB76 /* camera_turn_arraw@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_turn_arraw@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 		85A177A32378FFBE0081CB76 /* HJTurnView */ = {
 			isa = PBXGroup;
 			children = (
+				85A177DD237937030081CB76 /* camera_turn_arraw@2x.png */,
+				85A177DC237937030081CB76 /* camera_turn_arraw@3x.png */,
 				85A177A42378FFBE0081CB76 /* AppDelegate.h */,
 				85A177A52378FFBE0081CB76 /* AppDelegate.m */,
 				85A177A72378FFBE0081CB76 /* SceneDelegate.h */,
@@ -248,6 +254,8 @@
 				85A177B42378FFC00081CB76 /* LaunchScreen.storyboard in Resources */,
 				85A177B12378FFC00081CB76 /* Assets.xcassets in Resources */,
 				85A177AF2378FFBE0081CB76 /* Main.storyboard in Resources */,
+				85A177DF237937030081CB76 /* camera_turn_arraw@2x.png in Resources */,
+				85A177DE237937030081CB76 /* camera_turn_arraw@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
