@@ -4,3 +4,5 @@
 1、点击转盘上的任意一个节点，都可以将该节点转动到初始位置。
 2、转盘停止转动时，当停止的位置没有对齐初始位置，会自动计算滚动到初始位置，也可以通过属性设置不滚动到初始位置，任你选择。
 3、滑动速度快慢决定滑动节点长度。
+效果图如下：
+![image](https://github.com/jiang6777/HJTurnView/blob/master/HJTurnView/turnGif.gif)  
