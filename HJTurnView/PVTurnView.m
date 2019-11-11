@@ -14,10 +14,7 @@
 #define TURNSPEED 0.2
 @interface PVTurnView ()
 
-@property (nonatomic, strong) UIView *insideCircleView;
-@property (nonatomic, strong) UIView *shadowView;
 @property (nonatomic, strong) UIView *outsideIndicatorArrawImageView;
-@property (nonatomic, strong) UIView *insideIndicatorArrawImageView;
 @property (nonatomic, strong) UIView *outsideCircleView;
 @property (nonatomic, strong) NSMutableArray *turnContentArrays;
 @property (nonatomic, strong) NSMutableArray *turnContentInsideArrays;
@@ -73,19 +70,6 @@
 {
 	self.layer.cornerRadius = self.frame.size.width/2;
 	self.layer.masksToBounds = YES;
-	self.shadowView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SYRealValuePortait(240), SYRealValuePortait(240))];
-	self.shadowView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-	self.shadowView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
-	[self addSubview:self.shadowView];
-	self.shadowView.layer.cornerRadius = self.shadowView.bounds.size.width/2;
-	self.shadowView.layer.masksToBounds = YES;
-	
-	
-	self.insideCircleView = [[UIView alloc] initWithFrame:CGRectMake(SYRealValuePortait(19.5), SYRealValuePortait(19.5), self.shadowView.bounds.size.height - SYRealValuePortait(39), self.shadowView.bounds.size.height - SYRealValuePortait(39))];
-	self.insideCircleView.layer.borderColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.2].CGColor;
-	self.insideCircleView.layer.borderWidth = 1.0;
-	[self.shadowView addSubview:self.insideCircleView];
-	self.insideCircleView.layer.cornerRadius = self.insideCircleView.bounds.size.width/2;
 	
 	self.outsideIndicatorArrawImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_turn_arraw.png"]];
 	self.outsideIndicatorArrawImageView.frame = CGRectMake(0, (self.bounds.size.height/2 - 3.5), 7, 7);
@@ -101,7 +85,9 @@
 	self.layer.cornerRadius = self.frame.size.width/2;
 	self.layer.masksToBounds = YES;
 	
-	self.outsideCircleView = [[UIView alloc] initWithFrame:CGRectMake(SYRealValuePortait(19.5), SYRealValuePortait(19.5), self.bounds.size.height - SYRealValuePortait(39), self.bounds.size.height - SYRealValuePortait(39))];
+    float outsideMinX = SYRealValuePortait(25);
+    float outsideMinY = SYRealValuePortait(25);
+	self.outsideCircleView = [[UIView alloc] initWithFrame:CGRectMake(outsideMinX, outsideMinY, CGRectGetWidth(self.contentBackgroundView.frame) - 2*outsideMinX, CGRectGetHeight(self.contentBackgroundView.frame)-2*outsideMinY)];
 	self.outsideCircleView.layer.borderColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.2].CGColor;
 	self.outsideCircleView.layer.borderWidth = 1.0;
 	[self.contentBackgroundView addSubview:self.outsideCircleView];
@@ -113,14 +99,7 @@
 	self.outsideIndicatorArrawImageView.contentMode = UIViewContentModeScaleAspectFit;
 	[self addSubview:self.outsideIndicatorArrawImageView];
 	
-	
-	self.insideIndicatorArrawImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_turn_arraw.png"]];
-	self.insideIndicatorArrawImageView.frame = CGRectMake(self.shadowView.frame.origin.x, (self.bounds.size.height/2 - 3.5), 7, 7);
-	self.insideIndicatorArrawImageView.contentMode = UIViewContentModeScaleAspectFit;
-	[self addSubview:self.insideIndicatorArrawImageView];
-	
 	[self addGesture];
-	[self addInsideTurnView];
 }
 
 //添加滑动手势
@@ -183,7 +162,7 @@
 		NSLog(@"radian:%f",radian*(i + 1));
 		contentBtn.frame = CGRectMake(0, 0, SYRealValuePortait(70), SYRealValuePortait(40));
 		float radius = self.outsideCircleView.frame.size.width/2;
-		contentBtn.center = CGPointMake(SYRealValuePortait(19.5) + radius + radius * sin(radian),SYRealValuePortait(19.5) + radius - radius*cos(radian));
+		contentBtn.center = CGPointMake(CGRectGetMinX(self.outsideCircleView.frame) + radius + radius * sin(radian), CGRectGetMinX(self.outsideCircleView.frame) + radius - radius*cos(radian));
 //		contentBtn.transform = CGAffineTransformRotate(contentBtn.transform, angle);
 	}
 }
@@ -199,28 +178,6 @@
 	}
 	for (UIButton *btn in self.turnContentArrays) {
 		btn.enabled = enabled;
-	}
-}
-
-
-- (void)addInsideTurnView
-{
-//	NSArray *contentArray = @[/];
-	for (int i = 0; i < self.insideStringArrays.count; i++) {
-		CGFloat radian = 7*M_PI/4-M_PI_4*i;
-		UIButton *contentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-		[contentBtn addTarget:self action:@selector(controlCutClicked:) forControlEvents:UIControlEventTouchUpInside];
-		[contentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-		[contentBtn setTitle:self.insideStringArrays[i] forState:UIControlStateNormal];
-		contentBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-		[self addSubview:contentBtn];
-		[self.turnContentInsideArrays addObject:contentBtn];
-		if (i == 1) {
-			contentBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-		}
-		float radius = self.insideCircleView.frame.size.width/2;
-		contentBtn.frame = CGRectMake(0, 0, SYRealValuePortait(50), SYRealValuePortait(40));
-		contentBtn.center = CGPointMake(self.shadowView.frame.origin.x + SYRealValuePortait(19.5) + radius + radius * sin(radian),self.shadowView.frame.origin.x + SYRealValuePortait(19.5) + radius - radius*cos(radian));
 	}
 }
 
@@ -242,7 +199,6 @@
 		[(UIView*)obj removeFromSuperview];
 		[strongTurnView.turnContentInsideArrays removeAllObjects];
 		[strongTurnView.turnContentArrays removeAllObjects];
-		strongTurnView.insideCircleView = nil;
 		strongTurnView.contentBackgroundView = nil;
 		strongTurnView.totalRadian = 0;
 	}];
@@ -397,9 +353,6 @@
  */
 - (void)hideInsideTurnView:(BOOL)hidden
 {
-	self.shadowView.hidden = hidden;
-	self.insideIndicatorArrawImageView.hidden = hidden;
-	self.insideCircleView.hidden= hidden;
 	for (UIButton *btn in self.turnContentInsideArrays) {
 		btn.hidden = hidden;
 	}
